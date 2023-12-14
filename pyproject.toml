@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "unspeakable"
+version = "0.1.0"
+description = "And then went down to the ship"
+authors = ["Louis de Beaumont <debeaumont.louis@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+roman = "^4.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
