@@ -14,34 +14,26 @@ Give the answer in the following JSON format: `[{ 'canto': canto_number, 'lines'
 Do not return the lines, just the line numbers. If there are no references, return an empty list. Return both canto numbers and line numbers as integers. You must return the JSON as a string, and nothing else. There should be no part of your response that is not the JSON object.
 """
 
-response_context = """Ezra Pound’s Cantos are a long poem consisting of many poems called cantos. There are 117 cantos. Cantos are normally indexed by Roman Numeral, for example Canto I is the first canto, Canto II is the second canto, Canto XLI is the 41st Canto, and Canto CXVII is the 117th canto.
-Here are a few lines you might find useful in answering the following question.
+context = """You are responsible for identifying references to Cantos and lines in a piece of text request, providing them in JSON with the following format, {"references": [{"canto": canto_number, "lines": [line_number]}]}.
 """
 
-# prompt = """
-# \"Sigismundo’s epopte is presented in IX:ll.15-28, but in the following three lines we see a return to dromena.\"
-# """
+prompt = """
+\"Sigismundo’s epopte is presented in IX:ll.15-28, but in the following three lines we see a return to dromena.\"
+"""
 
-async def query(prompt, context=None, json=False):
-    context = reference_context
-    if context:
-        context = response_context + '\n' + context
-    
-    response_format = None
-    if json:
-        response_format={
-            'type': 'json_object'
-        },
+# prompt = "What is the last line of Canto I?"
 
-    completion = client.chat.completions.create(
-        model="local-model", # this field is currently unused
-        messages=[
-            {"role": "system", "content": context},
-            {"role": "user", "content": prompt}
-        ],
-        response_format=response_format,
-        temperature=0.0,
-        timeout=None,
-    )
+completion = client.chat.completions.create(
+    model="local-model", # this field is currently unused
+    messages=[
+        {"role": "system", "content": context},
+        {"role": "user", "content": prompt}
+    ],
+    response_format={
+        'type': 'json_object'
+    },
+    temperature=0.0,
+    timeout=None,
+)
 
-    return completion.choices[0].message.content
+print(completion.choices[0].message)

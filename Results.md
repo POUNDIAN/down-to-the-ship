@@ -382,12 +382,32 @@ Query | Result
 _idem_ | _idem_
 _cry_ | _cry_
 
-What can we do about this? My only thought now is either provide an example in the context, better: fine-tune, or employ a more powerful model.
 
-We can keep ourselves open to fine-tuning the model providing this functionality later. :)
+# Prompt is everything
 
-# What now?
+I didn’t know much about prompt engineering when starting this. I was thinking about it in terms of `context` and `prompt`, but there is nothing named `context` in the API. What there really is is the role belonging to the `system` and the role belonging to the `user`.
 
-Apart from integrating this into the actual line retrieval system (thus completing the intended functionality), we could look at some real world examples of references to lines and use those as input (even training dataset).
+Let’s give the `system` a tighter role (this is replacing what `context` was earlier).
 
-Final note, I haven’t changed the temperature to any improvement.
+>You are responsible for identifying references to Cantos and lines in a piece of text request, providing them in JSON with the following format, {"references": [{"canto": canto_number, "lines": [line_number]}]}.
+
+Observe our benchmark-failing query:
+
+Query | Result
+--- | ---
+\"Sigismundo’s epopte is presented in IX:ll.15-28, but in the following three lines we see a return to dromena.\" | `{ "references": [ {  "canto": 9,  "lines": [  15,  16,  17,  20,  21,  22,  23,  24,  25,  26,  27,  28  ] }, {  "canto": 9,  "lines": [  29,  30,  31  ] } ]}`
+
+But my model is _hot_. It has been queried all night with previous contexts. It is responding with integers, which is suspicious. What if I reload it? Surely these results will be lost. - Nope, damn thing gives the same correct result. Does it even learn from its chat?
+
+Wait, yes! I tried these two in succession.
+
+Query | Result
+--- | ---
+"What is the last line of Canto I?" | The last line of Canto I in Dante\'s "Inferno" is "Abandon all hope, ye who enter here." (in the original Italian, "Lasciate ogne speranza, voi ch\'entrate.") This famous quote is spoken by the ferocious demon at the entrance to Hell, warning those who dare to enter that they will never escape. It sets a haunting and ominous tone for the rest of the poem.
+\"Sigismundo’s epopte is presented in IX:ll.15-28, but in the following three lines we see a return to dromena.\" | The text material provided does not offer a direct explanation for why the narrator's attention shifts from Sigismundo's epopte to his dromena. However, it can be inferred that this shift may represent a change in focus or perspective within the narrative. Epopte refers to a visionary experience or prophetic insight, while dromena refers to actions or events that unfold in the story. The narrator's return to dromena after briefly describing Sigismundo's epopte suggests that the narrative is now moving back into the realm of action and plot development. This could be significant for understanding the overall structure and meaning of the text, as it may indicate a shift in tone or emphasis within the story.
+
+Wtf.
+
+So it’s possible, but it’s going to need some more. Either, as before, 'context', or possibly some training, so it knows how it should behave.
+
+In a sense we have lost progress, but we have learnt more.
