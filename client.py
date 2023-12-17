@@ -14,7 +14,7 @@ Do not return the lines, just the line numbers. If there are no references, retu
 """
 
 prompt = """
-\"Sigismundo’s epopte is presented in IX:ll.15-28.\"
+\"Sigismundo’s epopte is presented in IX:ll.15-28, but in the following three lines we see a return to dromena.\"
 """
 
 completion = client.chat.completions.create(
@@ -24,6 +24,7 @@ completion = client.chat.completions.create(
         {"role": "user", "content": prompt}
     ],
     temperature=0.7,
+    timeout=None,
 )
 
 print(completion.choices[0].message)

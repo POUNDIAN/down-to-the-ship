@@ -154,8 +154,30 @@ Obviously it’s doing that instruction chaining thing, but there is no ref. to 
 
 # 3. TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF
 
+_In particular, Q6, which might be a bit too big for my local (M1, 16GB)_
+
 Well, the much talked about Mixtral. I’m sure I’m not using the proper instruction format, so these results are going to be less than optimal, but let’s just spin it.
+
+Currently using LMStudio in Beta (0.2.9), with `rope_freq_scale` and `rope_freq_base` set to 0 (as suggested by @yags on the discord).
 
 Query | Result
 --- | ---
-\"Sigismundo’s epopte is presented in IX:ll.15-28.\" | ... 
+\"Sigismundo’s epopte is presented in IX:ll.15-28.\" | `''`
+
+Problem here was the OpenAI chat completion timeout of `600s` was hit. Fixed as follows:
+
+```python
+
+completion = client.chat.completions.create(
+    ...
+    timeout=None,
+)
+```
+
+Query | Result
+--- | ---
+\"Sigismundo’s epopte is presented in IX:ll.15-28.\" | `[{'canto': 9, 'lines': [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]}]`
+
+This result took 16 minutes on my local hardware (M1, 16GB), which was a bit disappointing considering we didn’t get the extra 3 lines.
+
+I’m going to leave Mixtral alone for now, considering its cost, and persist with Zephyr until prompted to try any other models.
