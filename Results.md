@@ -411,3 +411,8 @@ Wtf.
 So it’s possible, but it’s going to need some more. Either, as before, 'context', or possibly some training, so it knows how it should behave.
 
 In a sense we have lost progress, but we have learnt more.
+
+Malatesta, 8-11
+Jefferson, 31-34
+China, 52-61
+John Adams, 62-71

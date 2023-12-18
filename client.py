@@ -14,7 +14,7 @@ Give the answer in the following JSON format: `[{ 'canto': canto_number, 'lines'
 Do not return the lines, just the line numbers. If there are no references, return an empty list. Return both canto numbers and line numbers as integers. You must return the JSON as a string, and nothing else. There should be no part of your response that is not the JSON object.
 """
 
-context = """You are responsible for identifying references to Cantos and lines in a piece of text request, providing them in JSON with the following format, {"references": [{"canto": canto_number, "lines": [line_number]}]}.
+context = """You are responsible for identifying references to Cantos and lines in a piece of text. Extract the references and return them as a single JSON object in the format {"references": [{"canto": canto_number, "lines": [line_number]}]}. Return only the JSON.
 """
 
 prompt = """
@@ -26,7 +26,7 @@ prompt = """
 completion = client.chat.completions.create(
     model="local-model", # this field is currently unused
     messages=[
-        {"role": "system", "content": context},
+        {"role": "system", "content": reference_context},
         {"role": "user", "content": prompt}
     ],
     response_format={
