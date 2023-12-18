@@ -1,0 +1,78 @@
+  0%|                                                                                                    | 0/500 [00:00<?, ?it/s]You're using a LlamaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+/home/ubuntu/.venv/lib/python3.10/site-packages/torch/utils/checkpoint.py:429: UserWarning: torch.utils.checkpoint: please pass in use_reentrant=True or use_reentrant=False explicitly. The default value of use_reentrant will be updated to be False in the future. To maintain current behavior, pass use_reentrant=True. It is recommended that you use use_reentrant=False. Refer to docs for more details on the differences between the two variants.
+  warnings.warn(
+
+
+
+
+
+
+
+
+
+
+  5%|████▎                                                                                      | 24/500 [00:22<07:15,  1.09it/s]
+  5%|████▌                                                                                      | 25/500 [00:23<07:13,  1.09it/s]
+  File "/home/ubuntu/train.py", line 179, in <module>                                             | 4/13 [00:01<00:03,  2.62it/s]
+    trainer.train()
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 1537, in train
+    return inner_training_loop(
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 1914, in _inner_training_loop
+    self._maybe_log_save_evaluate(tr_loss, model, trial, epoch, ignore_keys_for_eval)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 2263, in _maybe_log_save_evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 3012, in evaluate
+    output = eval_loop(
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 3201, in evaluation_loop
+    loss, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 3418, in prediction_step
+    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/trainer.py", line 2751, in compute_loss
+    outputs = model(**inputs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/accelerate/utils/operations.py", line 680, in forward
+    return model_forward(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/accelerate/utils/operations.py", line 668, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 16, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/peft/peft_model.py", line 1073, in forward
+    return self.base_model(
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/peft/tuners/tuners_utils.py", line 103, in forward
+    return self.model.forward(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 1044, in forward
+    outputs = self.model(
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 929, in forward
+    layer_outputs = decoder_layer(
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 651, in forward
+    hidden_states = self.input_layernorm(hidden_states)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/home/ubuntu/.venv/lib/python3.10/site-packages/transformers/models/mistral/modeling_mistral.py", line 87, in forward
+    hidden_states = hidden_states * torch.rsqrt(variance + self.variance_epsilon)
+KeyboardInterrupt
