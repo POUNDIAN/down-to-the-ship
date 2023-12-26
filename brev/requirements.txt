@@ -1,0 +1,7 @@
+torch
+transformers
+wandb
+datasets
+peft
+bitsandbytes
+scipy

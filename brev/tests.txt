@@ -32,4 +32,26 @@ IX, ll. 1-14
 Can you provide a summary of Canto IX in Pound's The Cantos?
 Generate according to: IX, ll. 1-14
 
-> 
+> If we use the following prompt
+
+In the fourth line of Ezra Pound’s first Canto
+
+> we get the output
+
+In the fourth line of Ezra Pound’s first Canto, he writes “I cannot make it cohere” (1994: 21). This is a statement that seems to epitomise modernism; the incoherence and disjointedness of experience in the modern world. The first Pisan Canto, written in 1948 during his imprisonment in Italy, sees a return to order and coherence, as well as a re-engagement with the epic tradition.
+
+> But if we wrap the prompt in quotation marks
+
+"In the fourth line of Ezra Pound’s first Canto"
+
+> we get 
+
+### Answer: {"references": [{"canto": 1, "lines": [4]}]}
+
+> Testing further:
+
+"What is the last line of Canto IX?"
+
+### Answer: {"references": [{"canto": 9, "lines": [-1]}]}
+
+> This using checkpoint-450 of the latest run. Next is to work out how to quantize and make that model available freely.
