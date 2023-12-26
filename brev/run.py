@@ -21,9 +21,9 @@ base_model = AutoModelForCausalLM.from_pretrained(
 
 tokenizer = AutoTokenizer.from_pretrained(base_model_id, add_bos_token=True, trust_remote_code=True)
 
-ft_model = PeftModel.from_pretrained(base_model, "zephyr-cantos/checkpoint-500")
+ft_model = PeftModel.from_pretrained(base_model, "zephyr-cantos/checkpoint-375")
 
-eval_prompt = "What is the last line of Canto II by Ezra Pound?"
+eval_prompt = "In the fourth line of Ezra Pound’s first Canto"
 model_input = tokenizer(eval_prompt, return_tensors="pt").to("cuda")
 
 ft_model.eval()

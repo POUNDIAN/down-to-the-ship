@@ -21,6 +21,7 @@ def formatting_func(example):
     return text
 
 base_model_id = "HuggingFaceH4/zephyr-7b-beta"
+
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_use_double_quant=True,
@@ -29,6 +30,8 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(base_model_id, quantization_config=bnb_config)
+# https://www.georgesung.com/ai/qlora-ift/
+# This link has another param: device_map={"":0}
 
 tokenizer = AutoTokenizer.from_pretrained(
     base_model_id,
@@ -36,11 +39,16 @@ tokenizer = AutoTokenizer.from_pretrained(
     add_eos_token=True,
     add_bos_token=True,
 )
-tokenizer.pad_token = tokenizer.eos_token
 
+# tokenizer.pad_token = tokenizer.eos_token
+# The above line results in the LLM chaining questions to itself
+# vide https://www.georgesung.com/ai/qlora-ift/
+tokenizer.pad_token = "[PAD]"
+
+
+# Tokenize
 def generate_and_tokenize_prompt(prompt):
     return tokenizer(formatting_func(prompt))
-
 tokenized_train_dataset = train_dataset.map(generate_and_tokenize_prompt)
 tokenized_val_dataset = eval_dataset.map(generate_and_tokenize_prompt)
 
@@ -60,8 +68,10 @@ def plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, filename):
 
 plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, 'data_lengths.png')
 
+# Determined by a plotting training set lengths & inspecting
 max_length = 421
 
+# Retokenize with max_length padding
 def generate_and_tokenize_prompt(prompt):
     result = tokenizer(
         formatting_func(prompt),
@@ -71,16 +81,15 @@ def generate_and_tokenize_prompt(prompt):
     )
     result["labels"] = result["input_ids"].copy()
     return result
-
 tokenized_train_dataset = train_dataset.map(generate_and_tokenize_prompt)
 tokenized_val_dataset = eval_dataset.map(generate_and_tokenize_prompt)
 
-print(tokenized_train_dataset[1]['input_ids'])
-
 plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, 'data_lengths_maxed.png')
+
 
 model.gradient_checkpointing_enable()
 model = prepare_model_for_kbit_training(model)
+
 
 def print_trainable_parameters(model):
     """

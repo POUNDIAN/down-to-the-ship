@@ -10,24 +10,6 @@ This project calls a model run inside [LM Studio](https://lmstudio.ai/), availab
 
 To resolve lines, you need to create a `cantos/` directory that contains the cantos, each named `{roman}.txt`. Due to copyright, they can't be included here publicly. If you don’t have a `cantos` folder, the program will still extract references, but not resolve them.
 
-## Training
-
-Based on testing (notes in Results.md), it became clear the model required some fine-tuning. `dataset.jsonl` was created - 101 examples of text with either reference to Cantos, references to Cantos and lines, or no reference at all, taken from a range of sources including custom input (mimicking a user query), scholarship extracts (largely from the Cambridge Companion) and POUNDIAN’s [Plutarch's Eleusinian Rites](https://poundian.com/experiment/Plutarch's%20Eleusinian%20Rites) experiment (which contained line references, unlike the common scholarship which references by page).
-
-[TheBloke’s zephyr-7B-beta-GGUF Q6](https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF) performed the best (in accuracy and efficiency) of the three models tested in Results.md, but we couldn’t train it (it doesn’t come with the files necessary for training such as `pytorch.bin` or whatever, so instead we used the [HuggingFace Zephyr](https://huggingface.co/HuggingFaceH4/zephyr-7b-beta)).
-
-Training was performed on [brev.dev](https://brev.dev), using an NVIDIA A10G (24GiB) 1 GPUs x 4 CPUs | 16GiB. The files involved in training have been saved in the `training/` directory. The main reason for this is that there is a passive charge for storage incurred on brev.dev/AWS. We can spin up a new instance and upload the files whenever we want to use a rented instance.
-
-Training took under an hour, and cost...
-
-Query | Result
---- | ---
-What is the first line of Pound's first Canto? | ### Answer: {"references": [{"canto": 1, "lines": [1]}]}
-What is the last line of Canto II by Ezra Pound? |  ### Answer: {"references": [{"canto": 2, "lines": [-1]}]}
-
-
-
-
 
 ## Flaws
 
