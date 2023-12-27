@@ -47,3 +47,25 @@ In the fourth line of Ezra Pound’s first Canto, he writes: “I cannot make it
 ```
 
 I mean this is the fundamental behaviour of an LLM; it is a auto-completion device. So. Should we be escaping LLMs and going back to bert-like models? Or can we build a better context to avoid this? e.g. we were wrapping prompts in `"` to emphasise them being quotes over prompts.
+
+- view tests.txt for success
+
+# brev issues
+
+So twice I have lost my files on the brev instance, incurring extra time and financial cost, because I have to retrain. I suspect the problem is that I am clicking the all-too-clickable 'Build' on the instance page, instead of 'Start', thus rebuilding my instance and removing all progress stored on it.
+
+The checkpoints are really large files, and downloading them all is impractical. There is also the issue that we can't run `run.py` locally because it involves quantization, and I don't have a GPU. SO what we want to do is resolve all those problems: make the model locally runable, without downloading checkpoints, and avoid storing files on brev (which also costs a lot of money).
+
+I asked ChatGPT and got [this answer](https://chat.openai.com/share/a6968336-1bf4-4fc8-9d76-bfa878f9d734). Which I'm now following.
+
+The checkpoint contains 865MB of `adapter_model.safetensors` and 170MB of `optimizer.pt`. In run.py we do
+
+```python
+tokenizer = AutoTokenizer.from_pretrained(base_model_id, add_bos_token=True, trust_remote_code=True)
+
+ft_model = PeftModel.from_pretrained(base_model, "zephyr-cantos/checkpoint-425")
+```
+
+and by running `ft_model.save_pretrained('dtts-trained')`, we produce an `adapter_model.safetensors` of 600MB, which shows our memory savings by using Peft?
+
+Anyway, hopefully that `ft_model.save` will provide us with something we can run locally. At the very least, it provides us with something we can upload to HuggingFace, i.e. store elsewhere and pick up later for quantization or whatever.

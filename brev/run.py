@@ -21,7 +21,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
 
 tokenizer = AutoTokenizer.from_pretrained(base_model_id, add_bos_token=True, trust_remote_code=True)
 
-ft_model = PeftModel.from_pretrained(base_model, "zephyr-cantos/checkpoint-450")
+ft_model = PeftModel.from_pretrained(base_model, "zephyr-cantos/checkpoint-425")
 
 eval_prompt = "\"What is the last line of Canto IX?\""
 model_input = tokenizer(eval_prompt, return_tensors="pt").to("cuda")
@@ -29,3 +29,5 @@ model_input = tokenizer(eval_prompt, return_tensors="pt").to("cuda")
 ft_model.eval()
 with torch.no_grad():
     print(tokenizer.decode(ft_model.generate(**model_input, max_new_tokens=100, repetition_penalty=1.15)[0], skip_special_tokens=True))
+
+ft_model.save_pretrained('dtts-trained')
