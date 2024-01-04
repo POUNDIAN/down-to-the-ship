@@ -1,6 +1,6 @@
 .DS_Store
 __pycache__
+.venv
 cantos
 checkpoint-*/
-dtts-trained
-.venv
+deploy/adapter
