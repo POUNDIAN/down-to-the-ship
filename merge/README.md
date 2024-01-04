@@ -10,7 +10,7 @@ I followed [this tutorial](https://github.com/brevdev/notebooks/blob/main/gguf-e
 
 The model that _did_ download did not perform well.
 
-\<insert screenshot>
+<img width="1238" alt="Screenshot_2023-12-29_at_17 07 18" src="https://github.com/POUNDIAN/down-to-the-ship/assets/1782820/2ed91011-a9b3-4e1d-9467-36a6ec464173">
 
 [This](https://kaitchup.substack.com/p/dont-merge-your-lora-adapter-into) is the only thing I have read on the topic, and might be enough. 
 
