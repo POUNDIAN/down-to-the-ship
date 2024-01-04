@@ -69,3 +69,17 @@ ft_model = PeftModel.from_pretrained(base_model, "zephyr-cantos/checkpoint-425")
 and by running `ft_model.save_pretrained('dtts-trained')`, we produce an `adapter_model.safetensors` of 600MB, which shows our memory savings by using Peft?
 
 Anyway, hopefully that `ft_model.save` will provide us with something we can run locally. At the very least, it provides us with something we can upload to HuggingFace, i.e. store elsewhere and pick up later for quantization or whatever.
+
+## Merging?
+
+> In other words, we may get a model, after merging, that performs worse than the model we had at the end of QLoRA fine-tuning.
+
+From here: https://kaitchup.substack.com/p/dont-merge-your-lora-adapter-into
+
+It's true. View the screenshot or play with the local model. Even with a system prompt, it couldn't provide simple JSON as requested like the unmerged model could do while still on the instance.
+
+So merging isn't the way forward. It looks like we are just supposed to move our adapters around, leaving the base model alone.
+
+_Wait_, I think we can't do this, because we don't have a local GPU. When we want to use quantization features such as `load_in_4bit`, we must be on brev; these features are GPU only.
+
+Conclusion? We leave for brev, for now, until the taxman allows us to quantize locally.
