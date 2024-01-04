@@ -1,0 +1,5 @@
+torch
+transformers
+peft
+bitsandbytes==0.41.3
+scipy

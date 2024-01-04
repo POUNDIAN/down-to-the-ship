@@ -1,4 +1,8 @@
-# And then went down to the ship
+# down to the ship
+
+Experiment write-up: [POUNDIAN / down-to-the-ship](https://poundian.com/experiments/down-to-the-ship)
+
+View `deploy` for instructions on running the model.
 
 This repo contains code which tells you whether a piece of text refers to any cantos and lines, and returns those cantos and line numbers. It will soon be extended to return the lines themselves. This is an important part of 'context building'; it resolves references to The Cantos.
 
