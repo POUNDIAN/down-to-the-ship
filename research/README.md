@@ -1,3 +1,28 @@
+# Research
+
+This directory contains my first attempts at resolving this problem, namely understanding current and base capabilities.
+
+Three models were tested:
+
+1. TheBloke/claude2-alpaca-13B-GGUF
+2. HuggingFaceH4/zephyr-7b-beta
+3. TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF
+
+the second of which proved to be the current best.
+
+This work taught me a lot, if not everything I know, about models and prompt engineering. Whatever the utility of this experiment, it was time well spent and will serve in future developments, if not directly, then via level-ups. Anyone who takes the time to read this will see how I learn along the way.
+
+The result of this research was that some fine-tuning was necessary; that models were capable of performing as desired when 'hot' (i.e. having been instructed for a while), but failed when 'cold' (i.e. on a fresh load). Fine-tuning, stored in `./train`, solved this.
+
+## Installation
+
+Using poetry for this repo. Currently I've taken to running things from inside VSCode. If you `Cmd+P` and type `Python: Select Interpreter` you can select the poetry venv, which will fix any import errors.
+
+This project calls a model run inside [LMStudio](https://lmstudio.ai/), available through the LMS inference server.
+
+To resolve lines, you need to create a `cantos/` directory that contains the cantos, each named `{roman}.txt`. Due to copyright, they can't be included here publicly. If you don’t have a `cantos` folder, the program will still extract references, but not resolve them.
+
+
 # 1. TheBloke/claude2-alpaca-13B-GGUF
 
 [Model Card](https://huggingface.co/TheBloke/claude2-alpaca-13B-GGUF)

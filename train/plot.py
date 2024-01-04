@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-# # Use this one to establish lengths (then define max-length for padding)
+
+# Use this one to establish lengths (then define max-length for padding)
 # def generate_and_tokenize_prompt(prompt):
 #     return tokenizer(formatting_func(prompt))
 
@@ -22,4 +23,4 @@ def plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, filename):
     plt.savefig(filename)
 
 # plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, 'data_lengths.png')
-    # plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, 'data_lengths_maxed.png')
+# plot_data_lengths(tokenized_train_dataset, tokenized_val_dataset, 'data_lengths_maxed.png')

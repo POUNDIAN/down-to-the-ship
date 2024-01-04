@@ -12,8 +12,8 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from accelerate import FullyShardedDataParallelPlugin, Accelerator
 from torch.distributed.fsdp.fully_sharded_data_parallel import FullOptimStateDictConfig, FullStateDictConfig
 
-train_dataset = load_dataset('json', data_files='dataset.jsonl', split='train')
-eval_dataset = load_dataset('json', data_files='dataset.jsonl', split='train')
+train_dataset = load_dataset('json', data_files='poundtech101.jsonl', split='train')
+eval_dataset = load_dataset('json', data_files='poundtech101.jsonl', split='train')
 
 def formatting_func(example):
     quoted_input = f"\"{example['input']}\""
