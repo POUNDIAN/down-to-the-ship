@@ -30,7 +30,9 @@ That is such a simple piece of functionality that I thought it good to solve it 
 
 I have not taken the time to implement those last two things. The first is trivial, but I believe I will more likely require a live API rather than a local program to provide that functionality. The second will come naturally, as we attempt further investigation using LLMs. (This further investigation is already underway.)
 
-This repo contains code which tells you whether a piece of text refers to any cantos and lines, and returns those cantos and line numbers. It will soon be extended to return the lines themselves. This is an important part of 'context building'; it resolves references to The Cantos.
+This repo contains code which tells you whether a piece of text refers to any cantos and lines, and returns those cantos and line numbers. This is an important part of 'context building'; it resolves references to The Cantos.
+
+The code found within `./resolver` calls a local server which provides access to the Cantos. This code is publicly unavailable.
 
 ## Flaws
 
